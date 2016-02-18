@@ -19,10 +19,11 @@ import lombok.Data;
 @Table(name = "T_PART")
 public @Data class PartModel {
 
-	public PartModel(PartType partType, String name) {
+	public PartModel(PartType partType, String name, ManufacturerModel manufacturer) {
 		super();
 		this.partType = partType;
 		this.name = name;
+		this.manufacturer = manufacturer;
 	}
 
 	@Id

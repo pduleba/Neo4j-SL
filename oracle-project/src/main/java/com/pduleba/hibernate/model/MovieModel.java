@@ -19,9 +19,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public @Data class MovieModel {
 
-	public MovieModel(String name, DirectorModel directedBy) {
+	public MovieModel(String name, String type, DirectorModel directedBy) {
 		super();
 		this.name = name;
+		this.type = type;
 		this.directedBy = directedBy;
 	}
 
@@ -33,6 +34,9 @@ public @Data class MovieModel {
 	
 	@Column(name = "NAME")
 	private String name;
+	
+	@Column(name = "TYPE")
+	private String type;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_DIRECTOR")
