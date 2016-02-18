@@ -13,6 +13,11 @@ import lombok.Data;
 @Entity
 @Table(name = "T_MANUFACTURER")
 public @Data class ManufacturerModel {
+	
+	public ManufacturerModel(String name) {
+		super();
+		this.name = name;
+	}
 
 	@Id
 	@GeneratedValue(generator = "manufacturer-id-generator", strategy = GenerationType.SEQUENCE)

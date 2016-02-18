@@ -1,5 +1,8 @@
 package com.pduleba.hibernate.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -16,6 +19,12 @@ import lombok.Data;
 @Entity
 @Table(name = "T_CAR")
 public @Data class CarModel {
+
+	public CarModel(String name, List<PartModel> parts) {
+		super();
+		this.name = name;
+		this.parts = parts;
+	}
 
 	@Id
 	@Column(name = "ID")
@@ -26,8 +35,8 @@ public @Data class CarModel {
 	@Column(name = "NAME")
 	private String name;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID_MANUFACTURER")
-	private ManufacturerModel createdBy;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_CAR")
+	private List<PartModel> parts = new ArrayList<>();
 
 }

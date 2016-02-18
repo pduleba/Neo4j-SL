@@ -1,8 +1,5 @@
 package com.pduleba.hibernate.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,11 +19,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public @Data class DirectorModel {
 
-	public DirectorModel(String firstName, String lastName, List<CarModel> cars) {
+	public DirectorModel(String firstName, String lastName, CarModel car) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.cars = cars;
+		this.car = car;
 	}
 
 	@Id
@@ -42,12 +38,8 @@ public @Data class DirectorModel {
 	@Column(name = "LAST_NAME")
 	private String lastName;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-			name = "T_DIRECTOR2CAR",
-			joinColumns = @JoinColumn(name = "ID_DIRECTOR", referencedColumnName = "ID"),
-			inverseJoinColumns = @JoinColumn(name = "ID_CAR", referencedColumnName = "ID")
-	)
-	private List<CarModel> cars = new ArrayList<>();
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_CAR", referencedColumnName = "ID", unique = true)
+	private CarModel car;
 
 }
