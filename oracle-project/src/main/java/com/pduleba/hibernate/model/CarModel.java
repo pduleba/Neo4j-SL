@@ -20,9 +20,9 @@ import lombok.Data;
 @Table(name = "T_CAR")
 public @Data class CarModel {
 
-	public CarModel(String name, List<PartModel> parts) {
+	public CarModel(String model, List<PartModel> parts) {
 		super();
-		this.name = name;
+		this.model = model;
 		this.parts = parts;
 	}
 
@@ -32,8 +32,8 @@ public @Data class CarModel {
 	@SequenceGenerator(name = "car-id-generator", sequenceName = "CAR_SEQ", initialValue = 1, allocationSize = 1)
 	private Long id;
 
-	@Column(name = "NAME")
-	private String name;
+	@Column(name = "MODEL")
+	private String model;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_CAR")
